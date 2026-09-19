@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The Aromas - Authentic Mughlai & Multi-Cuisine in Bhubaneswar">
+    <title>The Aromas | Authentic Mughlai & Multi-Cuisine</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#1B2C24', // Dark chalkboard green
+                            green: '#2A4334',
+                            wood: '#8B5A2B', // Warm wood
+                            lightWood: '#D2B48C',
+                            accent: '#D4AF37', // Gold accent
+                            bg: '#F9F6F0', // Warm off-white
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Outfit"', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'hero-pattern': "linear-gradient(to right bottom, rgba(27, 44, 36, 0.8), rgba(27, 44, 36, 0.9)), url('assets/hero_bg.jpg')",
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Custom Styles & Micro-animations */
+        body {
+            background-color: #F9F6F0;
+        }
+        
+        .glass-nav {
+            background: rgba(27, 44, 36, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .menu-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(42, 67, 52, 0.15);
+        }
+        
+        .floating-btn {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Gradient Text */
+        .text-gradient {
+            background: linear-gradient(135deg, #D4AF37, #F3E5AB);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 antialiased selection:bg-brand-accent selection:text-brand-dark">
+
+    <!-- Sticky Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 glass-nav transition-all duration-300 py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="font-serif text-2xl md:text-3xl text-white font-bold tracking-wider">
+                        The Aromas<span class="text-brand-accent">.</span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#home" class="text-gray-200 hover:text-brand-accent transition-colors font-medium">Home</a>
+                    <a href="#menu" class="text-gray-200 hover:text-brand-accent transition-colors font-medium">Menu</a>
+                    <a href="#about" class="text-gray-200 hover:text-brand-accent transition-colors font-medium">About Us</a>
+                    <a href="#contact" class="text-gray-200 hover:text-brand-accent transition-colors font-medium">Contact</a>
+                    <a href="#menu" class="bg-brand-accent text-brand-dark px-6 py-2 rounded-full font-semibold hover:bg-white transition-colors duration-300 shadow-[0_0_15px_rgba(212,175,55,0.4)]">
+                        Order Now
+                    </a>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-200 hover:text-brand-accent focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-dark border-t border-gray-700 absolute w-full">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 shadow-lg">
+                <a href="#home" class="block px-3 py-2 text-base font-medium text-gray-200 hover:text-brand-accent hover:bg-brand-green rounded-md">Home</a>
+                <a href="#menu" class="block px-3 py-2 text-base font-medium text-gray-200 hover:text-brand-accent hover:bg-brand-green rounded-md">Menu</a>
+                <a href="#about" class="block px-3 py-2 text-base font-medium text-gray-200 hover:text-brand-accent hover:bg-brand-green rounded-md">About Us</a>
+                <a href="#contact" class="block px-3 py-2 text-base font-medium text-gray-200 hover:text-brand-accent hover:bg-brand-green rounded-md">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-[100svh] flex items-center justify-center bg-brand-dark bg-hero-pattern bg-cover bg-center bg-no-repeat bg-fixed">
+        <div class="absolute inset-0 bg-black/40"></div>
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-16">
+            <span class="block text-brand-accent font-medium tracking-[0.2em] uppercase mb-4 text-sm md:text-base fade-in">A Culinary Journey</span>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif text-white font-bold mb-6 leading-tight fade-in" style="transition-delay: 100ms;">
+                Welcome to <br/><span class="text-gradient">The Aromas</span>
+            </h1>
+            <p class="mt-4 text-lg md:text-2xl text-gray-200 font-light mb-10 fade-in" style="transition-delay: 200ms;">
+                Authentic Mughlai & Multi-Cuisine in Bhubaneswar
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in" style="transition-delay: 300ms;">
+                <a href="#menu" class="bg-brand-accent text-brand-dark px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:scale-105 transition-all duration-300 shadow-lg flex items-center justify-center gap-2">
+                    <i class="fas fa-utensils"></i> View Menu
+                </a>
+                <a href="#contact" class="bg-transparent border-2 border-brand-accent text-brand-accent px-8 py-4 rounded-full font-semibold text-lg hover:bg-brand-accent hover:text-brand-dark hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
+                    <i class="fas fa-shopping-bag"></i> Order Online
+                </a>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#trust" class="text-white/70 hover:text-brand-accent transition-colors">
+                <i class="fas fa-chevron-down text-2xl"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Social Proof / Trust Banner -->
+    <section id="trust" class="bg-brand-wood text-white py-4 relative z-20 shadow-xl">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-center gap-4 text-center md:text-left">
+            <div class="flex text-brand-accent text-xl">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <p class="font-medium text-lg md:text-xl font-serif tracking-wide">
+                "Rated 4.6 Stars by over 1,500 happy customers!"
+            </p>
+            <div class="flex items-center gap-2 text-sm text-brand-lightWood">
+                <i class="fab fa-google"></i> Google Reviews
+            </div>
+        </div>
+    </section>
+
+    <!-- Digital Menu Section -->
+    <section id="menu" class="py-20 bg-brand-bg relative">
+        <!-- Decorative subtle background elements -->
+        <div class="absolute top-0 left-0 w-64 h-64 bg-brand-green rounded-full mix-blend-multiply filter blur-3xl opacity-5"></div>
+        <div class="absolute bottom-0 right-0 w-80 h-80 bg-brand-wood rounded-full mix-blend-multiply filter blur-3xl opacity-5"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 fade-in">
+                <span class="text-brand-wood font-medium tracking-[0.2em] uppercase text-sm">Discover Our Menu</span>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-brand-dark mt-2 mb-4">Culinary Delights</h2>
+                <div class="h-1 w-24 bg-brand-accent mx-auto rounded-full"></div>
+            </div>
+
+            <!-- Menu Categories Tabs (Visual only for this static demo, usually JS powered) -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12 fade-in">
+                <button class="px-6 py-2 rounded-full bg-brand-dark text-white font-medium shadow-md">All</button>
+                <button class="px-6 py-2 rounded-full bg-white text-brand-dark border border-gray-200 font-medium hover:border-brand-accent hover:text-brand-accent transition-colors shadow-sm">Mughlai Specials</button>
+                <button class="px-6 py-2 rounded-full bg-white text-brand-dark border border-gray-200 font-medium hover:border-brand-accent hover:text-brand-accent transition-colors shadow-sm">Starters</button>
+                <button class="px-6 py-2 rounded-full bg-white text-brand-dark border border-gray-200 font-medium hover:border-brand-accent hover:text-brand-accent transition-colors shadow-sm">Main Course</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Category: Mughlai Specials -->
+                <div class="col-span-1 md:col-span-2 lg:col-span-3 mb-4 mt-8 fade-in">
+                    <h3 class="text-2xl font-serif font-bold text-brand-dark border-b-2 border-brand-lightWood pb-2 inline-block">Mughlai Specials</h3>
+                </div>
+
+                <!-- Menu Item 1 -->
+                <div class="bg-white rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] menu-card border border-gray-100 fade-in">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h4 class="text-xl font-serif font-bold text-brand-dark">Shahi Biryani</h4>
+                            <span class="inline-block mt-1 px-2 py-0.5 bg-brand-green/10 text-brand-green text-xs rounded-md font-medium border border-brand-green/20">Chef's Special</span>
+                        </div>
+                        <span class="text-lg font-bold text-brand-wood">₹349</span>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">Aromatic basmati rice cooked with tender marinated chicken, saffron, and authentic Mughlai spices in a sealed pot.</p>
+                    <button class="w-full py-2.5 rounded-xl border border-brand-wood text-brand-wood font-medium hover:bg-brand-wood hover:text-white transition-colors duration-300 flex items-center justify-center gap-2">
+                        <i class="fas fa-plus text-sm"></i> Add to Order
+                    </button>
+                </div>
+
+                <!-- Menu Item 2 -->
+                <div class="bg-white rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] menu-card border border-gray-100 fade-in">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h4 class="text-xl font-serif font-bold text-brand-dark">Mutton Rogan Josh</h4>
+                        </div>
+                        <span class="text-lg font-bold text-brand-wood">₹429</span>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">Slow-cooked tender lamb in a rich, flavorful gravy infused with Kashmiri red chilies and traditional warm spices.</p>
+                    <button class="w-full py-2.5 rounded-xl border border-brand-wood text-brand-wood font-medium hover:bg-brand-wood hover:text-white transition-colors duration-300 flex items-center justify-center gap-2">
+                        <i class="fas fa-plus text-sm"></i> Add to Order
+                    </button>
+                </div>
+
+                <!-- Menu Item 3 -->
+                <div class="bg-white rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] menu-card border border-gray-100 fade-in">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h4 class="text-xl font-serif font-bold text-brand-dark">Murgh Musallam</h4>
+                        </div>
+                        <span class="text-lg font-bold text-brand-wood">₹499</span>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">Whole chicken marinated in a rich almond and saffron paste, slow-roasted to perfection with a thick, luscious gravy.</p>
+                    <button class="w-full py-2.5 rounded-xl border border-brand-wood text-brand-wood font-medium hover:bg-brand-wood hover:text-white transition-colors duration-300 flex items-center justify-center gap-2">
+                        <i class="fas fa-plus text-sm"></i> Add to Order
+                    </button>
+                </div>
+
+                <!-- Category: Starters -->
+                <div class="col-span-1 md:col-span-2 lg:col-span-3 mb-4 mt-8 fade-in">
+                    <h3 class="text-2xl font-serif font-bold text-brand-dark border-b-2 border-brand-lightWood pb-2 inline-block">Tandoori Starters</h3>
+                </div>
+
+                <!-- Menu Item 4 -->
+                <div class="bg-white rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] menu-card border border-gray-100 fade-in">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 border border-red-600 flex items-center justify-center p-[2px] rounded-sm"><span class="w-full h-full bg-red-600 rounded-full"></span></span>
+                            <h4 class="text-xl font-serif font-bold text-brand-dark">Chicken Tikka</h4>
+                        </div>
+                        <span class="text-lg font-bold text-brand-wood">₹289</span>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">Boneless chicken chunks marinated in spiced yogurt and grilled in a clay oven for a smoky finish.</p>
+                    <button class="w-full py-2.5 rounded-xl border border-brand-wood text-brand-wood font-medium hover:bg-brand-wood hover:text-white transition-colors duration-300 flex items-center justify-center gap-2">
+                        <i class="fas fa-plus text-sm"></i> Add to Order
+                    </button>
+                </div>
+
+                <!-- Menu Item 5 -->
+                <div class="bg-white rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] menu-card border border-gray-100 fade-in">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 border border-green-600 flex items-center justify-center p-[2px] rounded-sm"><span class="w-full h-full bg-green-600 rounded-full"></span></span>
+                            <h4 class="text-xl font-serif font-bold text-brand-dark">Paneer Malai Tikka</h4>
+                        </div>
+                        <span class="text-lg font-bold text-brand-wood">₹259</span>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">Soft cottage cheese cubes marinated in fresh cream, cheese, and mild spices, roasted to a golden hue.</p>
+                    <button class="w-full py-2.5 rounded-xl border border-brand-wood text-brand-wood font-medium hover:bg-brand-wood hover:text-white transition-colors duration-300 flex items-center justify-center gap-2">
+                        <i class="fas fa-plus text-sm"></i> Add to Order
+                    </button>
+                </div>
+                
+                <!-- Menu Item 6 -->
+                <div class="bg-white rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] menu-card border border-gray-100 fade-in">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 border border-red-600 flex items-center justify-center p-[2px] rounded-sm"><span class="w-full h-full bg-red-600 rounded-full"></span></span>
+                            <h4 class="text-xl font-serif font-bold text-brand-dark">Galouti Kebab</h4>
+                        </div>
+                        <span class="text-lg font-bold text-brand-wood">₹319</span>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">Melt-in-the-mouth minced meat kebabs infused with a secret blend of aromatic spices. A royal delicacy.</p>
+                    <button class="w-full py-2.5 rounded-xl border border-brand-wood text-brand-wood font-medium hover:bg-brand-wood hover:text-white transition-colors duration-300 flex items-center justify-center gap-2">
+                        <i class="fas fa-plus text-sm"></i> Add to Order
+                    </button>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="inline-flex items-center justify-center gap-2 text-brand-wood font-semibold hover:text-brand-dark transition-colors border-b-2 border-brand-wood hover:border-brand-dark pb-1">
+                    Download Full Menu (PDF) <i class="fas fa-download text-sm"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="py-20 bg-brand-dark text-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="w-full lg:w-1/2 relative fade-in">
+                    <div class="aspect-w-4 aspect-h-5 rounded-2xl overflow-hidden shadow-2xl relative z-10">
+                        <img src="assets/real_interior.jpg.png" alt="Restaurant Interior" class="object-cover w-full h-[500px] hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <!-- Decorative element -->
+                    <div class="absolute -bottom-6 -right-6 w-48 h-48 bg-brand-wood rounded-full opacity-20 filter blur-2xl -z-0"></div>
+                    <div class="absolute -top-6 -left-6 w-full h-full border-2 border-brand-accent rounded-2xl -z-0 transform -translate-x-4 -translate-y-4"></div>
+                </div>
+                
+                <div class="w-full lg:w-1/2 fade-in">
+                    <span class="text-brand-accent font-medium tracking-[0.2em] uppercase text-sm">Our Story</span>
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mt-2 mb-6">A Tradition of Taste & Warmth</h2>
+                    
+                    <p class="text-gray-300 text-lg leading-relaxed mb-6 font-light">
+                        Nestled in the heart of Bhubaneswar, <strong class="text-brand-accent font-medium">The Aromas</strong> brings the rich, royal heritage of Mughlai cuisine to your table. We believe that great food is about more than just ingredients; it's about the memories created around the table.
+                    </p>
+                    <p class="text-gray-300 text-lg leading-relaxed mb-8 font-light">
+                        Our cozy, rustic atmosphere—with warm wood tones and soft lighting—is designed to make you feel right at home. Whether you're here for a celebratory feast or a quiet family dinner, our dedication to authentic flavors and heartfelt hospitality ensures every visit is unforgettable.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-6 mb-8">
+                        <div class="border-l-2 border-brand-accent pl-4">
+                            <h4 class="text-3xl font-serif text-brand-accent font-bold mb-1">15+</h4>
+                            <p class="text-sm text-gray-400">Years of Excellence</p>
+                        </div>
+                        <div class="border-l-2 border-brand-accent pl-4">
+                            <h4 class="text-3xl font-serif text-brand-accent font-bold mb-1">50+</h4>
+                            <p class="text-sm text-gray-400">Signature Dishes</p>
+                        </div>
+                    </div>
+                    
+                    <a href="#contact" class="inline-block bg-white text-brand-dark px-8 py-3 rounded-full font-semibold hover:bg-brand-accent hover:text-white transition-colors duration-300">
+                        Book a Table
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contact Info -->
+    <footer id="contact" class="bg-[#15231c] text-gray-300 pt-20 pb-10 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                
+                <!-- Brand Info -->
+                <div class="col-span-1 lg:col-span-1 fade-in">
+                    <a href="#" class="font-serif text-3xl text-white font-bold tracking-wider block mb-6">
+                        The Aromas<span class="text-brand-accent">.</span>
+                    </a>
+                    <p class="text-sm leading-relaxed mb-6">
+                        Experience the finest Mughlai and multi-cuisine delicacies in a warm, rustic setting. Your culinary adventure awaits.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-brand-green flex items-center justify-center text-white hover:bg-brand-accent transition-colors"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-brand-green flex items-center justify-center text-white hover:bg-brand-accent transition-colors"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-brand-green flex items-center justify-center text-white hover:bg-brand-accent transition-colors"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div class="col-span-1 fade-in" style="transition-delay: 100ms;">
+                    <h4 class="text-white font-serif text-xl font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#home" class="hover:text-brand-accent transition-colors">Home</a></li>
+                        <li><a href="#menu" class="hover:text-brand-accent transition-colors">Our Menu</a></li>
+                        <li><a href="#about" class="hover:text-brand-accent transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-brand-accent transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-brand-accent transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Info -->
+                <div class="col-span-1 fade-in" style="transition-delay: 200ms;">
+                    <h4 class="text-white font-serif text-xl font-semibold mb-6">Contact Us</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-map-marker-alt text-brand-accent mt-1"></i>
+                            <span>123 Culinary Avenue, Unit 4,<br>Bhubaneswar, Odisha 751001</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-phone-alt text-brand-accent"></i>
+                            <span>+91 98765 43210</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-envelope text-brand-accent"></i>
+                            <span>hello@thearomas.in</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Operating Hours -->
+                <div class="col-span-1 fade-in" style="transition-delay: 300ms;">
+                    <h4 class="text-white font-serif text-xl font-semibold mb-6">Operating Hours</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex justify-between border-b border-gray-700 pb-2">
+                            <span>Mon - Fri</span>
+                            <span class="text-brand-accent">11:00 AM - 10:30 PM</span>
+                        </li>
+                        <li class="flex justify-between border-b border-gray-700 pb-2">
+                            <span>Saturday</span>
+                            <span class="text-brand-accent">11:00 AM - 11:30 PM</span>
+                        </li>
+                        <li class="flex justify-between pb-2">
+                            <span>Sunday</span>
+                            <span class="text-brand-accent">11:00 AM - 11:30 PM</span>
+                        </li>
+                    </ul>
+                </div>
+                
+            </div>
+            
+            <div class="text-center text-sm text-gray-500 pt-8 border-t border-gray-800">
+                <p>&copy; 2026 The Aromas. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/919876543210?text=Hi!%20I'd%20like%20to%20order%20from%20The%20Aromas." target="_blank" 
+       class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-lg hover:scale-110 transition-transform duration-300 floating-btn"
+       aria-label="WhatsApp Us">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const icon = btn.querySelector('i');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+            if (menu.classList.contains('hidden')) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            }
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+
+        // Sticky Navbar Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2', 'shadow-md');
+                navbar.classList.remove('py-4');
+            } else {
+                navbar.classList.add('py-4');
+                navbar.classList.remove('py-2', 'shadow-md');
+            }
+        });
+
+        // Intersection Observer for Fade-in animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>
